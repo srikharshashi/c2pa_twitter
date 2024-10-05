@@ -1,32 +1,33 @@
+
+import '../models/user.dart';
+
 class UserDetailsService {
-  String _userName;
-  String _displayPictureUrl;
-  String _email;
+  //temporary fix
+  User? _user = User(email: "das@gmail.com", password:"123456", id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");
+  
 
-  // Constructor
-  UserDetailsService(this._userName, this._displayPictureUrl, this._email);
-
-  // Getter for user name
-  String get userName => _userName;
-
-  // Setter for user name
-  set userName(String userName) {
-    _userName = userName;
+  // Fetch user details
+  User? getUser() {
+    return _user;
   }
 
-  // Getter for display picture URL
-  String get displayPictureUrl => _displayPictureUrl;
-
-  // Setter for display picture URL
-  set displayPictureUrl(String displayPictureUrl) {
-    _displayPictureUrl = displayPictureUrl;
+  // Set user details
+  void setUser(User user) {
+    _user = user;
   }
 
-  // Getter for email
-  String get email => _email;
-
-  // Setter for email
-  set email(String email) {
-    _email = email;
+  // Update user details
+  void updateUser(User updatedUser) {
+    if (_user != null && _user!.id == updatedUser.id) {
+      _user = updatedUser;
+    }
   }
+
+  // Delete user details
+  void deleteUser() {
+    _user = null;
+  }
+
+  
+  
 }

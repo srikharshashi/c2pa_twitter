@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:c2pa_twitter/auth/controllers/login-controller/login_cubit.dart';
 
+import '../../routing/routes.dart';
+
 class LoginPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
@@ -18,7 +20,7 @@ class LoginPage extends StatelessWidget {
               SnackBar(content: Text('Login Failed')),
             );
           } else if (state is LoginSuccess) {
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, Routes.HOME);
           }
         },
         builder: (context, state) {

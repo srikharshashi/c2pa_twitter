@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:c2pa_twitter/splash/splash-controller/splash_screen_cubit.dart';
 
+import '../../routing/routes.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -25,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/random_logo.png'), // Replace with your logo asset
+                  Image.network('https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-11.png'), // Replace with your logo asset
                   SizedBox(height: 20),
                   CircularProgressIndicator(),
                 ],
@@ -34,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
           } else if (state is SplashScreenAuthenticated) {
             // Navigate to homepage
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).pushReplacementNamed('/homepage');
+              Navigator.of(context).pushReplacementNamed(Routes.HOME);
             });
             return Container(); // Return an empty container while navigating
           } else if (state is SplashScreenUnauthenticated) {
@@ -44,14 +46,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/login');
+                      Navigator.of(context).pushNamed(Routes.LOGIN);
                     },
                     child: Text('Log In'),
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed('/signup');
+                      Navigator.of(context).pushNamed(Routes.SIGNUP);
                     },
                     child: Text('Sign Up'),
                   ),

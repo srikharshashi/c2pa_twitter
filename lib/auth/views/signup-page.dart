@@ -1,3 +1,4 @@
+import 'package:c2pa_twitter/routing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:c2pa_twitter/auth/controllers/signup-controller/signup_cubit.dart'; 
@@ -18,7 +19,7 @@ class SignupPage extends StatelessWidget {
               SnackBar(content: Text('Signup Failed')),
             );
           } else if (state is SignupSuccess) {
-            Navigator.pushReplacementNamed(context, '/home');
+            Navigator.pushReplacementNamed(context, Routes.HOME);
           }
         },
         builder: (context, state) {
