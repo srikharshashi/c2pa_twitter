@@ -12,14 +12,14 @@ class AuthService {
   Future<User?> login(String email, String password) async {
     try {
       await Future.delayed(Duration(seconds: 3));
-      return User(email: "dasojusrikhar@gmail.com", password:"123456", id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");
+     return User(email: "dasojusrikhar@gmail.com", password:"123456", id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");
     } catch (e) {
       throw Exception('Login failed');
     }
   }
 
   // Signup method
-  Future<User?> signup(String email, String password) async {
+  Future<User?> signup(String email, String password, String userName, String profile) async {
     try {
       await Future.delayed(Duration(seconds: 3));
       return User(email: email, password: password, id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");

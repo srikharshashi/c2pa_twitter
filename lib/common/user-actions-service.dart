@@ -60,7 +60,7 @@ class UserActionsService {
     }
   }
 
-  Future<void> followUser(User userToFollow) async {
+  Future<void> followUser(int targetUserId) async {
     try {
       // Simulate network call
       return Future.delayed(Duration(seconds: 1), () {
@@ -71,7 +71,7 @@ class UserActionsService {
     }
   }
 
-  Future<void> unfollowUser(User userToUnfollow) async {
+  Future<void> unfollowUser(int targetUserId) async {
     try {
       // Simulate network call
       return Future.delayed(Duration(seconds: 1), () {
@@ -145,6 +145,17 @@ class UserActionsService {
   }
 
   Future<void> likeTweet(Tweet tweet) async {
+    // Simulate network call
+    try {
+      return Future.delayed(Duration(seconds: 1), () {
+        // Like the tweet
+      });
+    } catch (e) {
+      throw Exception('Failed to like tweet');
+    }
+  }
+
+  Future<User?> getuserById(int id)async {
     // Simulate network call
     try {
       return Future.delayed(Duration(seconds: 1), () {
