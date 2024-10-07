@@ -1,3 +1,5 @@
+import 'dart:math';
+
 class Tweet {
   final String content;
   final int authorId;
@@ -13,14 +15,24 @@ class Tweet {
     required this.retweets,
   });
 
-  factory Tweet.create(
-      {required String content, required int authorId, List<String>? media}) {
+  factory Tweet.create({required Map<String, dynamic> data}) {
     return Tweet(
-      content: content,
-      authorId: authorId,
-      media: media ?? [],
-      likes: 0,
-      retweets: 0,
+      content: data['content'],
+      authorId: data['authorId'],
+      media: data['media'].map((e) => e.toString()).toList(),
+      likes: data['likes'],
+      retweets: data['retweets'],
     );
+  }
+
+  static toMap(Tweet tweet) {
+    final Map<String, dynamic> data = {
+      'content': tweet.content,
+      'authorId': tweet.authorId,
+      'media': tweet.media,
+      'likes': tweet.likes,
+      'retweets': tweet.retweets,
+    };
+    return data;
   }
 }

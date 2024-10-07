@@ -9,6 +9,10 @@ class UserActionsService {
     this.user = user;
   }
 
+  void resetUser() {
+    this.user = null;
+  }
+
   UserActionsService();
 
   Future<List<Tweet>> getLikedTweets() async {
@@ -94,6 +98,8 @@ class UserActionsService {
             password: 'password',
             profile: 'profile_url',
             jwtToken: '',
+            followersCount: 10,
+            followingCount: 20,
           ),
         ]; // Return a list of followers
       });
@@ -114,6 +120,8 @@ class UserActionsService {
             password: 'password',
             profile: 'profile_url',
             jwtToken: '',
+            followersCount: 10,
+            followingCount: 20,
           ),
         ]; // Return a list of following users
       });

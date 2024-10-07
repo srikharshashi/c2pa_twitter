@@ -7,6 +7,8 @@ class User {
   final String password;
   final String profile;
   final String jwtToken;
+  final int followersCount;
+  final int followingCount;
 
   User({
     required this.id,
@@ -15,23 +17,33 @@ class User {
     required this.password,
     required this.profile,
     required this.jwtToken,
+    required this.followersCount,
+    required this.followingCount,
   });
 
-  factory User.create({
-    required int id,
-    required String name,
-    required String email,
-    required String password,
-    String? profile,
-    String? jwtToken,
-  }) {
+  factory User.create({required Map<String, dynamic> data}) {
     return User(
-      id: id,
-      name: name,
-      email: email,
-      password: password,
-      profile: profile ?? '',
-      jwtToken: jwtToken ?? '',
+      id: data['id'],
+      name: data['userName'],
+      email: data['email'],
+      password: data['password'],
+      profile: data['profile'] ?? "",
+      jwtToken: data['token'],
+      followersCount: data['followersCount'],
+      followingCount: data['followingCount'],
     );
+  }
+
+  static toMap(User user) {
+    final Map<String, dynamic> data = {
+      'id': user.id,
+      'userName': user.name,
+      'email': user.email,
+      'password': user.password,
+      'profile': user.profile,
+      'token': user.jwtToken,
+      'followersCount': user.followersCount,
+    };
+    return data;
   }
 }

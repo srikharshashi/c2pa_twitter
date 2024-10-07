@@ -11,6 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit(this.tweetHelperService,this.userDetailsService) : super(HomeInitial());
   TweetHelperService tweetHelperService ;
   UserDetailsService userDetailsService;
+  List<Tweet> tweets_temp = [];
 
   //write a method called get tweets which will emit HomeLoading state while fetching tweets
   //and HomeLoaded state when tweets are fetched
@@ -18,6 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeLoading());
     try {
       final tweets = await tweetHelperService.getHomeFeed(userDetailsService.getUser()!);
+      tweets_temp.addAll(tweets);
       emit(HomeLoaded(tweets: tweets));
     } catch (e) {
       emit(HomeError(message: e.toString()));

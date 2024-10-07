@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<SplashScreenCubit, SplashScreenState>(
+      body: BlocConsumer<SplashScreenCubit, SplashScreenState>(
         builder: (context, state) {
           if (state is SplashScreenInitial) {
             return Center(
@@ -35,9 +35,6 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           } else if (state is SplashScreenAuthenticated) {
             // Navigate to homepage
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              Navigator.of(context).pushReplacementNamed(Routes.HOME);
-            });
             return Container(); // Return an empty container while navigating
           } else if (state is SplashScreenUnauthenticated) {
             return Center(
@@ -62,7 +59,11 @@ class _SplashScreenState extends State<SplashScreen> {
             );
           }
           return Container(); // Default case
-        },
+        }, listener: (BuildContext context, SplashScreenState state) { 
+          if(state is SplashScreenAuthenticated){
+            Navigator.of(context).pushReplacementNamed(Routes.HOME);
+          }
+         },
       ),
     );
   }

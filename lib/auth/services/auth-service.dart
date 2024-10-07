@@ -1,30 +1,56 @@
 
+import '../../common/constants.dart';
 import '../../models/user.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class AuthService {
-  // Method to validate email format
-  bool _isValidEmail(String email) {
-    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
-    return emailRegex.hasMatch(email);
-  }
 
   // Login method
   Future<User?> login(String email, String password) async {
+    final url = Uri.parse(Constants.BASE_SERVER_URL+'/auth/login');
     try {
-      await Future.delayed(Duration(seconds: 3));
-     return User(email: "dasojusrikhar@gmail.com", password:"123456", id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({'email': email, 'password': password}),
+      );
+
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        print(responseBody);
+        return User.create(data : responseBody);
+      } else {
+        throw Exception('Login failed: ${response.reasonPhrase}');
+      }
     } catch (e) {
-      throw Exception('Login failed');
+      throw Exception('Login failed: $e');
     }
   }
 
   // Signup method
   Future<User?> signup(String email, String password, String userName, String profile) async {
+    final url = Uri.parse(Constants.BASE_SERVER_URL + '/auth/register');
     try {
-      await Future.delayed(Duration(seconds: 3));
-      return User(email: email, password: password, id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({
+          'email': email,
+          'password': password,
+          'userName': userName,
+          'profile': profile,
+        }),
+      );
+      print(response.toString());
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        return User.create(data: responseBody);
+      } else {
+        throw Exception('Signup failed: ${response.body}');
+      }
     } catch (e) {
-      throw Exception('Signup failed');
+      throw Exception('Signup failed: ${e.toString()}');
     }
   }
 }

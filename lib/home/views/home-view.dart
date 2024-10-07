@@ -28,6 +28,8 @@ class HomeView extends StatelessWidget {
                     email: "ksokso",
                     password: "koskos",
                     profile: "oksoks", jwtToken: '1234',
+                    followersCount: 10,
+                    followingCount: 10,
                   ),
                   onLike: () {
                     // Handle like action

@@ -119,7 +119,7 @@ class TweetHelperService {
     }
   }
 
-   Future<List<Tweet>> getUserTweets(User user) async {
+   Future<List<Tweet>> getUserTweets(int userId) async {
     // Simulate network delay
     try {
       await Future.delayed(Duration(seconds: 3));

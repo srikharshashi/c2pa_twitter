@@ -3,8 +3,11 @@ import '../models/user.dart';
 
 class UserDetailsService {
   //temporary fix
-  User? _user = User(email: "das@gmail.com", password:"123456", id: 1, name: "Srikhar", profile: "profile", jwtToken:"123456");
+  User? _user =null;
   
+  void resetUser(){
+    _user = null;
+  }
 
   // Fetch user details
   User? getUser() {

@@ -7,6 +7,7 @@ class SignupPage extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class SignupPage extends StatelessWidget {
         listener: (context, state) {
           if (state is SignupFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Signup Failed')),
+              SnackBar(content: Text('Signup Failed ${state.message}')),
             );
           } else if (state is SignupSuccess) {
             Navigator.pushReplacementNamed(context, Routes.HOME);
@@ -29,6 +30,19 @@ class SignupPage extends StatelessWidget {
               key: _formKey,
               child: Column(
                 children: [
+                  TextFormField(
+                    controller: _usernameController,
+                    decoration: InputDecoration(labelText: 'User Name'),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username';
+                      }
+                      if (value.length < 3) {
+                        return 'Please enter a valid username';
+                      }
+                      return null;
+                    },
+                  ),
                   TextFormField(
                     controller: _emailController,
                     decoration: InputDecoration(labelText: 'Email'),
@@ -66,6 +80,8 @@ class SignupPage extends StatelessWidget {
                           context.read<SignupCubit>().signup(
                                 _emailController.text,
                                 _passwordController.text,
+                                _usernameController.text,
+                  
                               );
                         }
                       },

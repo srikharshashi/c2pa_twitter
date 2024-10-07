@@ -17,7 +17,7 @@ class LoginPage extends StatelessWidget {
         listener: (context, state) {
           if (state is LoginFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Login Failed')),
+              SnackBar(content: Text(state.message)),
             );
           } else if (state is LoginSuccess) {
             Navigator.pushReplacementNamed(context, Routes.HOME);
