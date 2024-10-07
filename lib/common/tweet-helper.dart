@@ -118,4 +118,15 @@ class TweetHelperService {
       throw Exception('Failed to get home feed');
     }
   }
+
+   Future<List<Tweet>> getUserTweets(User user) async {
+    // Simulate network delay
+    try {
+      await Future.delayed(Duration(seconds: 3));
+      // Simulate network response
+      return mockTweets; // Return a list of tweets
+    } catch (e) {
+      throw Exception('Failed to get home feed');
+    }
+  }
 }

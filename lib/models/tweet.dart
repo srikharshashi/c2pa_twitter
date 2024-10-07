@@ -12,4 +12,15 @@ class Tweet {
     required this.likes,
     required this.retweets,
   });
+
+  factory Tweet.create(
+      {required String content, required int authorId, List<String>? media}) {
+    return Tweet(
+      content: content,
+      authorId: authorId,
+      media: media ?? [],
+      likes: 0,
+      retweets: 0,
+    );
+  }
 }

@@ -14,6 +14,24 @@ class User {
     required this.email,
     required this.password,
     required this.profile,
-    required  this.jwtToken,
+    required this.jwtToken,
   });
+
+  factory User.create({
+    required int id,
+    required String name,
+    required String email,
+    required String password,
+    String? profile,
+    String? jwtToken,
+  }) {
+    return User(
+      id: id,
+      name: name,
+      email: email,
+      password: password,
+      profile: profile ?? '',
+      jwtToken: jwtToken ?? '',
+    );
+  }
 }
